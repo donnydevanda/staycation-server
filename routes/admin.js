@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const adminController = require("../controllers/adminController");
-const { upload } = require("../middleware/multer");
+const { upload, uploadMultiple } = require("../middleware/multer");
 
 // Dashboard
 router.get("/dashboard", adminController.viewDashboard);
@@ -17,7 +17,12 @@ router.post("/bank", upload, adminController.addBank);
 router.put("/bank", upload, adminController.editBank);
 router.delete("/bank/:id", adminController.deleteBank);
 
-router.get("/item", adminController.viewItem);
+// Item
+router.get("/item/show-detail-item/:itemId", adminController.viewDetailItem);
+router.post("/item/add/feature", uploadSingle, adminController.addFeature);
+router.put("/item/update/feature", uploadSingle, adminController.editFeature);
+router.delete("/item/:itemId/feature/:id", adminController.deleteFeature);
+
 router.get("/booking", adminController.viewBooking);
 
 module.exports = router;
