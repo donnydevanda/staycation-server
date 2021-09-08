@@ -1,8 +1,13 @@
 const router = require("express").Router();
 const adminController = require("../controllers/adminController");
-const { upload, uploadMultiple } = require("../middleware/multer");
+const { upload, uploadMultiple } = require("../middlewares/multer");
+const auth = require("../middlewares/auth");
 
 // Dashboard
+router.get("/signin", adminController.viewSignin);
+router.post("/signin", adminController.actionSignin);
+router.use(auth);
+router.get("/logout", adminController.actionLogout);
 router.get("/dashboard", adminController.viewDashboard);
 
 // Category
@@ -18,11 +23,18 @@ router.put("/bank", upload, adminController.editBank);
 router.delete("/bank/:id", adminController.deleteBank);
 
 // Item
+router.get("/item", adminController.viewItem);
+router.post("/item", uploadMultiple, adminController.addItem);
+router.get("/item/show-image/:id", adminController.showImageItem);
+router.get("/item/:id", adminController.showEditItem);
+router.put("/item/:id", uploadMultiple, adminController.editItem);
+router.delete("/item/:id/delete", adminController.deleteItem);
+
+// Detail Item
 router.get("/item/show-detail-item/:itemId", adminController.viewDetailItem);
 router.post("/item/add/feature", upload, adminController.addFeature);
 router.put("/item/update/feature", upload, adminController.editFeature);
 router.delete("/item/:itemId/feature/:id", adminController.deleteFeature);
-router.get("/item/show-detail-item/:itemId", adminController.viewDetailItem);
 
 // Feature
 router.post("/item/add/feature", upload, adminController.addFeature);

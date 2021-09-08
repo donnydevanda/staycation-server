@@ -2,37 +2,104 @@ const Category = require("../models/Category");
 const Bank = require("../models/Bank");
 const Item = require("../models/Item");
 const Image = require("../models/Image");
+const Feature = require("../models/Feature");
+const Activity = require("../models/Activity");
+const Booking = require("../models/Booking");
+const Member = require("../models/Member");
+const Users = require("../models/Users");
 const fs = require("fs-extra");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
-  // Dashboard
-  viewDashboard: (req, res) => {
-    res.render("admin/dashboard/view_dashboard", {
-      title: "Staycation | Dashboard",
-    });
+  viewSignin: async (req, res) => {
+    try {
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus };
+      if (req.session.user == null || req.session.user == undefined) {
+        res.render("index", {
+          alert,
+          title: "Staycation | Login",
+        });
+      } else {
+        res.redirect("/admin/dashboard");
+      }
+    } catch (error) {
+      res.redirect("/admin/signin");
+    }
   },
-  // End Dashboard
 
-  // Start Category
+  actionSignin: async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = await Users.findOne({ username: username });
+      if (!user) {
+        req.flash("alertMessage", "User yang anda masukan tidak ada!!");
+        req.flash("alertStatus", "danger");
+        res.redirect("/admin/signin");
+      }
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (!isPasswordMatch) {
+        req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
+        req.flash("alertStatus", "danger");
+        res.redirect("/admin/signin");
+      }
+
+      req.session.user = {
+        id: user.id,
+        username: user.username,
+      };
+
+      res.redirect("/admin/dashboard");
+    } catch (error) {
+      res.redirect("/admin/signin");
+    }
+  },
+
+  actionLogout: (req, res) => {
+    req.session.destroy();
+    res.redirect("/admin/signin");
+  },
+
+  viewDashboard: async (req, res) => {
+    try {
+      const member = await Member.find();
+      const booking = await Booking.find();
+      const item = await Item.find();
+      res.render("admin/dashboard/view_dashboard", {
+        title: "Staycation | Dashboard",
+        user: req.session.user,
+        member,
+        booking,
+        item,
+      });
+    } catch (error) {
+      res.redirect("/admin/dashboard");
+    }
+  },
+
   viewCategory: async (req, res) => {
     try {
       const category = await Category.find();
       const alertMessage = req.flash("alertMessage");
-      const alertStatus = req.flash("allertStatus");
+      const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render("admin/category/view_category", {
         category,
         alert,
         title: "Staycation | Category",
+        user: req.session.user,
       });
     } catch (error) {
-      res.render("admin/category/view_category");
+      res.redirect("/admin/category");
     }
   },
+
   addCategory: async (req, res) => {
     try {
       const { name } = req.body;
+      // console.log(name);
       await Category.create({ name });
       req.flash("alertMessage", "Success Add Category");
       req.flash("alertStatus", "success");
@@ -43,6 +110,7 @@ module.exports = {
       res.redirect("/admin/category");
     }
   },
+
   editCategory: async (req, res) => {
     try {
       const { id, name } = req.body;
@@ -58,6 +126,7 @@ module.exports = {
       res.redirect("/admin/category");
     }
   },
+
   deleteCategory: async (req, res) => {
     try {
       const { id } = req.params;
@@ -72,19 +141,18 @@ module.exports = {
       res.redirect("/admin/category");
     }
   },
-  // End Category
 
-  // Start Bank
   viewBank: async (req, res) => {
     try {
       const bank = await Bank.find();
       const alertMessage = req.flash("alertMessage");
-      const alertStatus = req.flash("allertStatus");
+      const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render("admin/bank/view_bank", {
         title: "Staycation | Bank",
         alert,
         bank,
+        user: req.session.user,
       });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
@@ -92,6 +160,7 @@ module.exports = {
       res.redirect("/admin/bank");
     }
   },
+
   addBank: async (req, res) => {
     try {
       const { name, nameBank, nomorRekening } = req.body;
@@ -110,6 +179,7 @@ module.exports = {
       res.redirect("/admin/bank");
     }
   },
+
   editBank: async (req, res) => {
     try {
       const { id, name, nameBank, nomorRekening } = req.body;
@@ -139,6 +209,7 @@ module.exports = {
       res.redirect("/admin/bank");
     }
   },
+
   deleteBank: async (req, res) => {
     try {
       const { id } = req.params;
@@ -154,9 +225,7 @@ module.exports = {
       res.redirect("/admin/bank");
     }
   },
-  // End Bank
 
-  // Start Item
   viewItem: async (req, res) => {
     try {
       const item = await Item.find()
@@ -173,6 +242,7 @@ module.exports = {
         alert,
         item,
         action: "view",
+        user: req.session.user,
       });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
@@ -213,6 +283,7 @@ module.exports = {
       res.redirect("/admin/item");
     }
   },
+
   showImageItem: async (req, res) => {
     try {
       const { id } = req.params;
@@ -355,9 +426,6 @@ module.exports = {
       res.redirect(`/admin/item/show-detail-item/${itemId}`);
     }
   },
-  // End Item
-
-  // Start Feature
   addFeature: async (req, res) => {
     const { name, qty, itemId } = req.body;
 
@@ -438,9 +506,7 @@ module.exports = {
       res.redirect(`/admin/item/show-detail-item/${itemId}`);
     }
   },
-  // End Feature
 
-  // Start Activity
   addActivity: async (req, res) => {
     const { name, type, itemId } = req.body;
 
@@ -521,9 +587,7 @@ module.exports = {
       res.redirect(`/admin/item/show-detail-item/${itemId}`);
     }
   },
-  // End Activity
 
-  // Start Booking
   viewBooking: async (req, res) => {
     try {
       const booking = await Booking.find()
@@ -589,5 +653,4 @@ module.exports = {
       res.redirect(`/admin/booking/${id}`);
     }
   },
-  // End Booking
 };
