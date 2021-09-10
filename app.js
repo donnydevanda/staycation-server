@@ -7,15 +7,12 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb+srv://md:123@cluster0.vtdux.mongodb.net/db_staycation?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-  }
-);
+mongoose.connect("mongodb://localhost:27017/db_staycation", {
+  useNewUrlParser: true,
+});
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
 const apiRouter = require("./routes/api");
 
@@ -46,7 +43,7 @@ app.use(
 );
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/api/v1/member", apiRouter);
 

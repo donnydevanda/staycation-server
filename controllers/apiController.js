@@ -107,9 +107,8 @@ module.exports = {
     const {
       idItem,
       duration,
-      // price,
-      bookingStartDate,
-      bookingEndDate,
+      startDate,
+      endDate,
       firstName,
       lastName,
       email,
@@ -128,8 +127,8 @@ module.exports = {
       idItem === undefined ||
       duration === undefined ||
       // price === undefined ||
-      bookingStartDate === undefined ||
-      bookingEndDate === undefined ||
+      startDate === undefined ||
+      endDate === undefined ||
       firstName === undefined ||
       lastName === undefined ||
       email === undefined ||
@@ -164,8 +163,8 @@ module.exports = {
 
     const newBooking = {
       invoice,
-      bookingStartDate,
-      bookingEndDate,
+      startDate,
+      endDate,
       total: (total += tax),
       itemId: {
         _id: item.id,
@@ -175,7 +174,7 @@ module.exports = {
       },
 
       memberId: member.id,
-      payments: {
+      payment: {
         proofPayment: `images/${req.file.filename}`,
         bankFrom: bankFrom,
         accountHolder: accountHolder,

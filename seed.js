@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 
 // Connect to MongoDB via Mongoose
 seeder.connect(
-  "mongodb+srv://md:123@cluster0.vtdux.mongodb.net/db_staycation?retryWrites=true&w=majority",
+  "mongodb://localhost:27017/db_staycation",
   {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -22,7 +22,7 @@ seeder.connect(
       "./models/Image",
       "./models/Member",
       "./models/Booking",
-      "./models/Users",
+      "./models/User",
     ]);
 
     // Clear specified collections
@@ -36,7 +36,7 @@ seeder.connect(
         "Feature",
         "Image",
         "Booking",
-        "Users",
+        "User",
       ],
       function () {
         // Callback to populate DB once collections have been cleared
@@ -55,7 +55,7 @@ var data = [
     documents: [
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc901111"),
-        name: "Houses with beauty backyard",
+        name: "Houses with Beautiful Backyard",
         itemId: [
           { _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902222") },
           { _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902223") },
@@ -65,7 +65,7 @@ var data = [
       },
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc901112"),
-        name: "Hotels with large living room",
+        name: "Hotels with Large Living Room",
         itemId: [
           { _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902226") },
           { _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902227") },
@@ -75,7 +75,7 @@ var data = [
       },
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc901113"),
-        name: "Apartment with kitchen",
+        name: "Apartment with Comfy Kitchen",
         itemId: [
           { _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902230") },
           { _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902231") },
@@ -86,6 +86,7 @@ var data = [
     ],
   },
   // end category
+
   // start item
   {
     model: "Item",
@@ -656,6 +657,7 @@ var data = [
     ],
   },
   // end item
+
   // start image
   {
     model: "Image",
@@ -813,6 +815,7 @@ var data = [
     ],
   },
   // end image
+
   // start feature
   {
     model: "Feature",
@@ -820,64 +823,64 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa01"),
-        name: "bedroom",
-        qty: 2,
+        name: "Bedroom",
+        quantity: 2,
         imageUrl: "images/feature-1.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa02"),
-        name: "living room",
-        qty: 23,
+        name: "Living Room",
+        quantity: 23,
         imageUrl: "images/feature-2.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa03"),
-        name: "televison",
-        qty: 12,
+        name: "Television",
+        quantity: 12,
         imageUrl: "images/feature-3.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa04"),
-        name: "televison",
-        qty: 5,
+        name: "Television",
+        quantity: 5,
         imageUrl: "images/feature-4.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa05"),
-        name: "mbp/s",
-        qty: 5,
+        name: "Wifi",
+        quantity: 5,
         imageUrl: "images/feature-5.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa06"),
-        name: "unit ready",
-        qty: 5,
+        name: "Unit Ready",
+        quantity: 5,
         imageUrl: "images/feature-6.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa07"),
-        name: "refigrator",
-        qty: 5,
+        name: "Refrigerator",
+        quantity: 5,
         imageUrl: "images/feature-7.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa08"),
-        name: "televion",
-        qty: 5,
+        name: "Television",
+        quantity: 5,
         imageUrl: "images/feature-8.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
@@ -885,8 +888,8 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa09"),
-        name: "bedroom",
-        qty: 2,
+        name: "Bedroom",
+        quantity: 2,
         imageUrl: "images/feature-1.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
@@ -894,7 +897,7 @@ var data = [
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa10"),
         name: "living room",
-        qty: 23,
+        quantity: 23,
         imageUrl: "images/feature-2.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
@@ -902,7 +905,7 @@ var data = [
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa11"),
         name: "televison",
-        qty: 12,
+        quantity: 12,
         imageUrl: "images/feature-3.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
@@ -910,45 +913,46 @@ var data = [
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa12"),
         name: "televison",
-        qty: 5,
+        quantity: 5,
         imageUrl: "images/feature-4.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa13"),
-        name: "mbp/s",
-        qty: 5,
+        name: "Wifi",
+        quantity: 5,
         imageUrl: "images/feature-5.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa14"),
-        name: "unit ready",
-        qty: 5,
+        name: "Unit Ready",
+        quantity: 5,
         imageUrl: "images/feature-6.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa15"),
-        name: "refigrator",
-        qty: 5,
+        name: "Refrigerator",
+        quantity: 5,
         imageUrl: "images/feature-7.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa16"),
-        name: "televion",
-        qty: 5,
+        name: "Television",
+        quantity: 5,
         imageUrl: "images/feature-8.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
       },
     ],
   },
   // end feature
+
   // start activity
   {
     model: "Activity",
@@ -1021,8 +1025,8 @@ var data = [
     documents: [
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90cee1"),
-        bookingStartDate: "12-12-2020",
-        bookingEndDate: "12-12-2020",
+        startDate: "12-12-2020",
+        endDate: "12-12-2020",
         invoice: 1231231,
         itemId: {
           _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
@@ -1033,70 +1037,76 @@ var data = [
         total: 12,
         memberId: mongoose.Types.ObjectId("5e96cbe292b97300fc903333"),
         bankId: mongoose.Types.ObjectId("5e96cbe292b97300fc903323"),
-        payments: {
-          proofPayment: "images/bukti.jpeg",
-          bankFrom: "BCA",
+        payment: {
+          proof: "images/invoice.jpeg",
+          bankName: "BCA",
           status: "Proses",
-          accountHolder: "ang",
+          accountName: "Emdi",
         },
       },
     ],
   },
   // end booking
 
-  // member
+  // start member
   {
     model: "Member",
     documents: [
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc903333"),
-        firstName: "Elfin",
-        lastName: "Sanjaya",
-        email: "elfinsanjaya12@gmail.com",
-        phoneNumber: "082377954008",
+        firstName: "Donny",
+        lastName: "Devanda",
+        email: "donnydevanda@gmail.com",
+        phoneNumber: "08176012345",
       },
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc903334"),
-        firstName: "Yein",
-        lastName: "Narayana",
-        email: "elfinsanjaya1207@gmail.com",
-        phoneNumber: "082377954008",
+        firstName: "Yuval",
+        lastName: "Noah",
+        email: "yuvalnoah@gmail.com",
+        phoneNumber: "08126054321",
       },
     ],
   },
+  // end member
+
+  // start bank
   {
     model: "Bank",
     documents: [
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc903322"),
-        nameBank: "Mandiri",
-        nomorRekening: "089898",
-        name: "elfin",
-        imageUrl: "images/logo bca.png",
+        bankName: "Mandiri",
+        accountNumber: "089898",
+        accountName: "PT Staycation Indonesia",
+        imageUrl: "images/logo-mandiri.png",
       },
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc903323"),
-        nameBank: "BCA",
-        nomorRekening: "878678",
-        name: "elfin",
-        imageUrl: "images/logo mandiri.png",
+        bankName: "BCA",
+        accountNumber: "878678",
+        accountName: "PT Staycation Indonesia",
+        imageUrl: "images/logo-bca.png",
       },
     ],
   },
+  // end bank
+
+  // start user
   {
-    model: "Users",
+    model: "User",
     documents: [
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc903345"),
         username: "admin",
-        password: "rahasia",
+        password: "admin",
       },
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc903346"),
         username: "superadmin",
-        password: "rahasia",
-        role: "admin",
+        password: "superadmin",
       },
     ],
   },
+  // end user
 ];

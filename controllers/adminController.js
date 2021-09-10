@@ -6,7 +6,7 @@ const Feature = require("../models/Feature");
 const Activity = require("../models/Activity");
 const Booking = require("../models/Booking");
 const Member = require("../models/Member");
-const Users = require("../models/Users");
+const User = require("../models/User");
 const fs = require("fs-extra");
 const path = require("path");
 const bcrypt = require("bcryptjs");
@@ -33,7 +33,7 @@ module.exports = {
   actionSignin: async (req, res) => {
     try {
       const { username, password } = req.body;
-      const user = await Users.findOne({ username: username });
+      const user = await User.findOne({ username: username });
       if (!user) {
         req.flash("alertMessage", "User yang anda masukan tidak ada!!");
         req.flash("alertStatus", "danger");
@@ -630,7 +630,7 @@ module.exports = {
     const { id } = req.params;
     try {
       const booking = await Booking.findOne({ _id: id });
-      booking.payments.status = "Accept";
+      booking.payment.status = "Accept";
       await booking.save();
       req.flash("alertMessage", "Success Confirmation Pembayaran");
       req.flash("alertStatus", "success");
@@ -644,7 +644,7 @@ module.exports = {
     const { id } = req.params;
     try {
       const booking = await Booking.findOne({ _id: id });
-      booking.payments.status = "Reject";
+      booking.payment.status = "Reject";
       await booking.save();
       req.flash("alertMessage", "Success Reject Pembayaran");
       req.flash("alertStatus", "success");
