@@ -24,11 +24,11 @@ module.exports = {
 
   addBank: async (req, res) => {
     try {
-      const { name, nameBank, nomorRekening } = req.body;
+      const { accountName, bankName, accountNumber } = req.body;
       await Bank.create({
-        name,
-        nameBank,
-        nomorRekening,
+        accountName,
+        bankName,
+        accountNumber,
         imageUrl: `images/${req.file.filename}`,
       });
       req.flash("alertMessage", "Success Add Bank");
@@ -43,21 +43,21 @@ module.exports = {
 
   editBank: async (req, res) => {
     try {
-      const { id, name, nameBank, nomorRekening } = req.body;
+      const { id, accountName, bankName, accountNumber } = req.body;
       const bank = await Bank.findOne({ _id: id });
       if (req.file == undefined) {
-        bank.name = name;
-        bank.nameBank = nameBank;
-        bank.nomorRekening = nomorRekening;
+        bank.accountName = accountName;
+        bank.bankName = bankName;
+        bank.accountNumber = accountNumber;
         await bank.save();
         req.flash("alertMessage", "Success Update Bank");
         req.flash("alertStatus", "success");
         res.redirect("/admin/bank");
       } else {
         await fs.unlink(path.join(`public/${bank.imageUrl}`));
-        bank.name = name;
-        bank.nameBank = nameBank;
-        bank.nomorRekening = nomorRekening;
+        bank.accountName = accountName;
+        bank.bankName = bankName;
+        bank.accountNumber = accountNumber;
         bank.imageUrl = `images/${req.file.filename}`;
         await bank.save();
         req.flash("alertMessage", "Success Update Bank");

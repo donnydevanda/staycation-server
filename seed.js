@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 
 // Connect to MongoDB via Mongoose
 seeder.connect(
-  "mongodb://localhost:27017/db_staycation",
+  "mongodb+srv://md:123@cluster0.vtdux.mongodb.net/db_staycation?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -839,7 +839,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa03"),
-        name: "Television",
+        name: "Kitchen",
         quantity: 12,
         imageUrl: "images/feature-3.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
@@ -847,7 +847,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa04"),
-        name: "Television",
+        name: "Bathtub",
         quantity: 5,
         imageUrl: "images/feature-4.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
@@ -863,7 +863,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa06"),
-        name: "Unit Ready",
+        name: "Air Conditioner",
         quantity: 5,
         imageUrl: "images/feature-6.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
@@ -896,7 +896,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa10"),
-        name: "living room",
+        name: "Living Room",
         quantity: 23,
         imageUrl: "images/feature-2.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
@@ -904,7 +904,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa11"),
-        name: "televison",
+        name: "Kitchen",
         quantity: 12,
         imageUrl: "images/feature-3.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
@@ -912,7 +912,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90aa12"),
-        name: "televison",
+        name: "Bathtub",
         quantity: 5,
         imageUrl: "images/feature-4.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902223"),
@@ -977,13 +977,6 @@ var data = [
         name: "Labour and Wait",
         type: "Shopping",
         imageUrl: "images/activity-3.png",
-        itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
-      },
-      {
-        _id: mongoose.Types.ObjectId("5e96cbe292b97300fc90bb04"),
-        name: "Labour and Wait",
-        type: "Shopping",
-        imageUrl: "images/activity-4.png",
         itemId: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
       },
       // done 2

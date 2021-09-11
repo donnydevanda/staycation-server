@@ -7,21 +7,20 @@
     <div class="row">
       <div class="col-md-4">
         <img
+          class="py-3"
           src="https://admin-staycation.herokuapp.com/<%= booking.payment.proofPayment %>"
           alt="image"
           style="width: 100%; display: block"
         />
-
         <div class="row ml-1">
           <% if(booking.payment.status == 'Proses') {%>
-
           <form
             action="/admin/booking/<%= booking.id %>/confirmation?_method=PUT"
             method="POST"
           >
             <button type="submit" class="btn btn-success btn-sm">
               <i class="fas fa-check"></i>
-              Confirmation
+              Confirm
             </button>
           </form>
           <form
@@ -60,7 +59,7 @@
                   booking.memberId.lastName %>
                 </td>
                 <td>$ <%= booking.total %></td>
-                <td><%= booking.payment.bankFrom %></td>
+                <td><%= booking.payment.bankName %></td>
                 <td><%= booking.itemId.title %></td>
               </tr>
             </tbody>

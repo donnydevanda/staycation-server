@@ -7,9 +7,12 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/db_staycation", {
-  useNewUrlParser: true,
-});
+mongoose.connect(
+  "mongodb+srv://md:123@cluster0.vtdux.mongodb.net/db_staycation?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+  }
+);
 
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");

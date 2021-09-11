@@ -2,7 +2,7 @@ const Feature = require("../models/Feature");
 
 module.exports = {
   addFeature: async (req, res) => {
-    const { name, qty, itemId } = req.body;
+    const { name, quantity, itemId } = req.body;
 
     try {
       if (!req.file) {
@@ -12,7 +12,7 @@ module.exports = {
       }
       const feature = await Feature.create({
         name,
-        qty,
+        quantity,
         itemId,
         imageUrl: `images/${req.file.filename}`,
       });
@@ -31,12 +31,12 @@ module.exports = {
   },
 
   editFeature: async (req, res) => {
-    const { id, name, qty, itemId } = req.body;
+    const { id, name, quantity, itemId } = req.body;
     try {
       const feature = await Feature.findOne({ _id: id });
       if (req.file == undefined) {
         feature.name = name;
-        feature.qty = qty;
+        feature.quantity = quantity;
         await feature.save();
         req.flash("alertMessage", "Success Update Feature");
         req.flash("alertStatus", "success");
@@ -44,7 +44,7 @@ module.exports = {
       } else {
         await fs.unlink(path.join(`public/${feature.imageUrl}`));
         feature.name = name;
-        feature.qty = qty;
+        feature.quantity = quantity;
         feature.imageUrl = `images/${req.file.filename}`;
         await feature.save();
         req.flash("alertMessage", "Success Update Feature");
