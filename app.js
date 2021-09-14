@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
+const cors = require("cors");
 mongoose.connect(
   "mongodb+srv://md:123@cluster0.vtdux.mongodb.net/db_staycation?retryWrites=true&w=majority",
   {
