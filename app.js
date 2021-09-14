@@ -14,6 +14,8 @@ mongoose.connect(
   }
 );
 
+app.use(cors());
+
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
