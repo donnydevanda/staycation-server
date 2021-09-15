@@ -113,8 +113,8 @@ module.exports = {
       lastName,
       email,
       phoneNumber,
-      accountHolder,
-      bankFrom,
+      accountName,
+      bankName,
     } = req.body;
 
     if (!req.file) {
@@ -126,15 +126,14 @@ module.exports = {
     if (
       idItem === undefined ||
       duration === undefined ||
-      // price === undefined ||
       startDate === undefined ||
       endDate === undefined ||
       firstName === undefined ||
       lastName === undefined ||
       email === undefined ||
       phoneNumber === undefined ||
-      accountHolder === undefined ||
-      bankFrom === undefined
+      accountName === undefined ||
+      bankName === undefined
     ) {
       res.status(404).json({ message: "Lengkapi semua field" });
     }
@@ -175,9 +174,9 @@ module.exports = {
 
       memberId: member.id,
       payment: {
-        proofPayment: `images/${req.file.filename}`,
-        bankFrom: bankFrom,
-        accountHolder: accountHolder,
+        proof: `images/${req.file.filename}`,
+        bankName: bankName,
+        accountName: accountName,
       },
     };
 
