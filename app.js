@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
+const compression = require("compression");
 const cors = require("cors");
 mongoose.connect(
   "mongodb+srv://md:123@cluster0.vtdux.mongodb.net/db_staycation?retryWrites=true&w=majority",
@@ -21,7 +22,7 @@ const adminRouter = require("./routes/admin");
 const apiRouter = require("./routes/api");
 
 var app = express();
-
+app.use(compression());
 app.use(cors());
 
 // view engine setup
@@ -34,7 +35,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 6000000 },
   })
 );
 app.use(flash());

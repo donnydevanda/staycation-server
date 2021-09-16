@@ -67,7 +67,6 @@ module.exports = {
         testimonial,
       });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Internal server error" });
     }
   },
@@ -120,8 +119,6 @@ module.exports = {
     if (!req.file) {
       return res.status(404).json({ message: "Image not found" });
     }
-
-    console.log(idItem);
 
     if (
       idItem === undefined ||
