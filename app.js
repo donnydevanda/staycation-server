@@ -1,3 +1,4 @@
+require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -9,9 +10,8 @@ const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const compression = require("compression");
 const cors = require("cors");
-mongoose.connect("process.env.DATABASE_URL", {
-  useNewUrlParser: true,
-});
+
+mongoose.connect(process.env.MONGODB_URI);
 
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
